@@ -61,4 +61,15 @@ public class UsuarioController {
 			return ResponseEntity.status(403).build();
 		}
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Usuario> logar(@RequestBody Usuario usuario){
+		Usuario retorno = (Usuario)dao.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
+		
+		if(retorno == null) {
+			return ResponseEntity.status(404).build();
+		}
+		
+		return ResponseEntity.ok(retorno);
+	}
 }
