@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projetofinal.beans.Usuario;
@@ -38,5 +40,18 @@ public class UsuarioController {
 		}
 		
 		return ResponseEntity.ok(retorno);
+	}
+	
+	@PostMapping("/usuario")
+	public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
+		try {
+			dao.save(usuario);
+			
+			return ResponseEntity.ok(usuario);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(403).build();
+		}
 	}
 }
