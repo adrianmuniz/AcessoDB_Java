@@ -45,6 +45,13 @@ public class UsuarioController {
 	@PostMapping("/usuario")
 	public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
 		try {
+			if(usuario.getId() != 0) {
+				boolean exists = dao.existsById(usuario.getId());
+				if(!exists) 
+					return ResponseEntity.status(404).build();
+				
+			}
+			
 			dao.save(usuario);
 			
 			return ResponseEntity.ok(usuario);
