@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="TB_PROVEDORA")
 public class Provedora {
@@ -31,6 +33,7 @@ public class Provedora {
 	
 	@Column(name="fundacao")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	private Date fundacao;
 
 	@OneToMany(mappedBy = "provedora", cascade = CascadeType.ALL)
