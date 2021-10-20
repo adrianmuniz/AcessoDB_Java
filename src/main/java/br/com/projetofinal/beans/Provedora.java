@@ -1,12 +1,15 @@
 package br.com.projetofinal.beans;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +32,19 @@ public class Provedora {
 	@Column(name="fundacao")
 	@Temporal(TemporalType.DATE)
 	private Date fundacao;
+
+	@OneToMany(mappedBy = "provedora", cascade = CascadeType.ALL)
+	private List<Serie> series;
+	
+	
+	
+	public List<Serie> getSeries() {
+		return series;
+	}
+
+	public void setSeries(List<Serie> series) {
+		this.series = series;
+	}
 
 	public int getId() {
 		return id;
