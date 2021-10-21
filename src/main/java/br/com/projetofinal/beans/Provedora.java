@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="TB_PROVEDORA")
@@ -37,6 +38,7 @@ public class Provedora {
 	private Date fundacao;
 
 	@OneToMany(mappedBy = "provedora", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("provedora")
 	private List<Serie> series;
 	
 	

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="TB_SERIE")
 public class Serie {
@@ -30,6 +32,7 @@ public class Serie {
 	private boolean lancamento;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("series")
 	private Provedora provedora;
 
 	public int getId() {
