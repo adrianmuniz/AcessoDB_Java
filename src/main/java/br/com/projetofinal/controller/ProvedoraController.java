@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,5 +38,14 @@ public class ProvedoraController {
 			return ResponseEntity.status(404).build();
 		}
 		return ResponseEntity.ok(provedoras);
+	}
+	
+	@GetMapping("/provedora/{cod}")
+	public ResponseEntity<Provedora> getProvedora(@PathVariable int cod){
+		Provedora provedora = dao.findById(cod).orElse(null);
+		if(provedora==null) {
+			return ResponseEntity.status(404).build();
+		}
+		return ResponseEntity.ok(provedora);
 	}
 }
