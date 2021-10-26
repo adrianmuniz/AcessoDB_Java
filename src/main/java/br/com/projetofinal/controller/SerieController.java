@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +50,24 @@ public class SerieController {
 			return ResponseEntity.status(404).build();
 		}
 		return ResponseEntity.ok(serie);
+	}
+	
+	@DeleteMapping("/serie/{id}")
+	public ResponseEntity<Serie> deleteSerie(@PathVariable int id){
+		try {
+			Serie retorno = (Serie) dao.findById(id).orElse(null);
+			if(retorno==null) {
+				return ResponseEntity.status(404).build();
+			}
+			else {
+				dao.delete(retorno);
+				
+				return ResponseEntity.ok(retorno);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(403).build();
+		}
 	}
 }
